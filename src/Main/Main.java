@@ -1,4 +1,5 @@
 package Main;
+import Composite.*;
 import Iterator.*;
 import Strategy.*;
 
@@ -9,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
     Scanner in = new Scanner(System.in);
-    System.out.println("Choose pattern:\n\t[1] - Strategy\n\t[2] - Iterator");
+    System.out.println("Choose pattern:\n\t[1] - Strategy\n\t[2] - Iterator\n\t[3] - Composite");
     int choose = in.nextInt();
     switch (choose) {
         case 1: {
@@ -53,6 +54,29 @@ public class Main {
                 WordPart part = (WordPart) wordIterator.next();
                 System.out.println(part.getClass() + ": " + part.getWordPart());
             }
+        }
+        case 3:{
+            Apple[] apples1 = {new Apple(12.5), new Apple(21.9), new Apple(33.3), new Apple(19.7),
+                    new Apple(14)};
+
+            Apple[] apples2 = {new Apple(12.5), new Apple(21.9), new Apple(33.3), new Apple(19.7),
+                    new Apple(14)};
+
+            AppleTree appleTree1 = new AppleTree(apples1);
+            AppleTree appleTree2 = new AppleTree(apples2);
+
+            AppleTree[] appleTrees = {appleTree1, appleTree2};
+
+            Land[] lands = {new Land(appleTrees, 25.7)};
+
+            Garden garden = new Garden(lands);
+
+            CompositeCount compositeCount = new CompositeCount();
+            compositeCount.add(garden);
+            compositeCount.add(lands[0]);
+            compositeCount.add(appleTrees[0]);
+            compositeCount.add(appleTrees[1]);
+            compositeCount.printCount();
         }
     }
     }
